@@ -1,0 +1,39 @@
+{% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
+%}
+<form method="POST" enctype = "multipart/form-data">
+  <h3 align="center">Edit Profile</h3>
+  <div class="form-group">
+    <label for="bio">Bio</label>
+    <input
+      type="text"
+      class="form-control"
+      id="bio"
+      name="bio"
+      placeholder="Never give up (changable)"
+    />
+  </div>
+  <div class="form-group">
+    <label for="url">URL</label>
+    <input
+      type="text"
+      class="form-control"
+      id="url"
+      name="url"
+      placeholder="Your website (url)"
+    />
+  </div>
+  <div class="form-group">
+    <label for="pic">Profile Pic</label>
+    <input 
+      type="file" 
+      class="form-control"
+      id="pic" 
+      name="pic"
+      placeholder="Local file location"
+    />
+  </div>
+  <br />
+  <button type="submit" class="btn btn-primary">Edit Profile</button>
+</form>
+{% endblock %}
+

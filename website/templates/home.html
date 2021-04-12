@@ -1,6 +1,78 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
 %}
-<h1 align="center">Notes</h1>
+<div class="container">
+    <div class="row">
+      <div class="col-sm-7 col-md-7 col-lg-7">
+        <div align="center">
+          <img src="{{ url_for('static', filename='code_profile.jpg') }}" alt="Profile Pic" style="width:40%;height:auto;" class="rounded-circle">
+          <div class="container"> <!-- Container Profile -->
+            <div class="row">
+              <div class="col-sm">
+                <h5> 
+                  {{ user.first_name }} 
+                </h5>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm">
+                {{ user.profile_id }}
+                {% if profile %}
+                  {{ profile.bio[0:40] }}
+                
+                  </br>
+                {{ profile.bio[41:150] }}
+               {% endif %}
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm">
+                <a href="{{ profile.url }}"> {{ profile.url }} </a>
+              </div>
+            </div>
+          </div> <!-- End Container Profile -->
+        </div>
+      </div>
+      <div class="col-sm col-lg-2">
+        <h5> Posts: 9001 </h5>
+      </div>
+      <div class="col-sm col-lg-2">
+        <h5> Views: 0 </h5>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm">
+        <div align="center">
+          <h1> Photo Blog </h1>
+        </div>
+      </div>
+    </div>
+  <div class="container">
+    <table>
+    <tr>
+      <td>
+        <a href="posts.html#post1">
+         <img src="{{ url_for('static', filename='coding_notes.jpg') }}" class="grid_photo_3x3 center">
+        </a>
+      </td>
+      <td>
+        <a href="posts.html#post2">
+         <img src="{{ url_for('static', filename='coding_glasses.jpg') }}" class="grid_photo_3x3 center">
+        </a>
+      </td>
+      <td>
+        <a href="posts.html#post3">
+          <img src="{{ url_for('static', filename='coding_python1.jpg') }}" class="grid_photo_3x3 center">
+        </a>
+      </td>
+
+    </tr>
+    </table>
+  </div>
+<!-- Original content
+  <h1 align="center">Notes</h1>
 <ul class="list-group list-group-flush" id="notes">
   {% for note in user.notes %}
   <li class="list-group-item">
@@ -17,5 +89,5 @@
   <div align="center">
     <button type="submit" class="btn btn-primary">Add Note</button>
   </div>
-</form>
+</form> -->
 {% endblock %}

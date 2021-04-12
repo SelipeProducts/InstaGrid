@@ -1,0 +1,42 @@
+.grid_photo_3x3{
+  width: 98%;
+  height: auto;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.grid_photo_posts{
+  width: auto;
+  height: 90%;
+  margin-right: auto;
+  margin-left: auto;
+}
+.logo{
+  width:50%;
+  height: auto;
+}
+.mynavback{
+  background-color: #ffffff;
+}
+
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.txt_align_left{
+   text-align: left;
+ }
+
+.post_padding{
+  padding: 3%;
+}
+
+.footer_padding{
+  padding-top: 1%;
+  padding-left: 3%;
+  padding-right: 3%;
+  padding-bottom: 3%;
+}
