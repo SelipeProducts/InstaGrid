@@ -50,7 +50,7 @@ def profile():
   if request.method == 'POST':
     f = request.files['pic']
     f.save(f.filename)
-
+    
     bio = request.form.get('bio')
     url = request.form.get('url')
     pic = request.form.get('pic')
@@ -98,20 +98,20 @@ def profile():
 @views.route('/blogs', methods=['GET', 'POST'])
 def blogs():
   # creating temp data
-  # temp_blog = Blogs(title = "Title1", content="ABC", date=datetime.datetime.utcnow)
-  # temp_blog2 = Blogs(title = "Title2", content="ABC", date=datetime.datetime.utcnow)
-  # temp_blog3 = Blogs(title = "Title3", content="ABC", date=datetime.datetime.utcnow)
-  # db.session.add(temp_blog)
-  # db.session.add(temp_blog2)
-  # db.session.add(temp_blog3)
-  # db.session.commit()
+  temp_blog = Blogs(title = "Title1", content="ABC", date=datetime.datetime.utcnow)
+  temp_blog2 = Blogs(title = "Title2", content="ABC", date=datetime.datetime.utcnow)
+  temp_blog3 = Blogs(title = "Title3", content="ABC", date=datetime.datetime.utcnow)
+  db.session.add(temp_blog)
+  db.session.add(temp_blog2)
+  db.session.add(temp_blog3)
+  db.session.commit()
 
   # blog1 = Blogs.query.filter_by(title='Title1').first()
   # blog2 = Blogs.query.filter_by(title='Title2').first()
   # blog3 = Blogs.query.filter_by(title='Title3').first()
 
 
-  # blog_array = Blogarray(blog_id=blog1.title, array_id=0)
+  # blog_array = Blogarray(blogarray_blog=temp_blog, blogarray_bloglist=....)
 
   # profile = Profile.query.filter_by(id=current_user.profile_id).first()
   # profile.bloglist_id = "Bloglist id......."
