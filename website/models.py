@@ -3,8 +3,8 @@ from flask_login import UserMixin
 from sqlalchemy.sql import func
 
 blog_list = db.Table('blog_list', 
-  db.collumn('user_id', db.Integer, db.ForeignKey('user.id')),
-  db.collumn('array_id', db.Integer, db.ForeignKey('blogarray.id'))
+  db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+  db.Column('array_id', db.Integer, db.ForeignKey('blog_array.id'))
 )
 
 class User(db.Model, UserMixin):
@@ -17,7 +17,7 @@ class User(db.Model, UserMixin):
     url = db.Column(db.String(150))
     pic = db.Column(db.String(150))
     notes = db.relationship('Note', backref='note_creater')
-    bloglist_rel = db.relationship('blog_array', secondary=blog_list, backref=db.backref('blogs'), lazy='dynamic')
+    bloglist_rel = db.relationship('Blog_array', secondary=blog_list, backref=db.backref('bloglist'), lazy='dynamic')
 
 class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -25,9 +25,9 @@ class Note(db.Model):
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-class Blogarray(db.Model):
+class Blog_array(db.Model):
   id = db.Column(db.Integer, primary_key=True)
-  blog_rel = db.relationship('Blog', backref='blog')
+  blog_rel = db.relationship('Blog', backref='blogs')
 
   
 class Blog(db.Model):

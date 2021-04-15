@@ -1,6 +1,11 @@
 {% extends "base.html" %} {% block title %} Blogs {% endblock %} 
 {% block content %}
-  
+  {{user}}
+  {{user.bloglist}}
+  {% for indiv_blog in user.bloglist %}
+    Title <br/>
+   {{indiv_blog.title}}
+  {% endfor %}
 
 
 {% endblock %}

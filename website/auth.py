@@ -4,6 +4,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
 
+import os
+from werkzeug.utils import secure_filename
+
 
 auth = Blueprint('auth', __name__)
 
@@ -38,11 +41,17 @@ def logout():
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
     if request.method == 'POST':
+        
+        f = request.files['pic']
+        if f.filename != '':
+          f.save(os.path.join('website/static', f.filename))
         email = request.form.get('email')
         first_name = request.form.get('firstName')
         last_name = request.form.get('lastName')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
+        pic = f.filename
+
 
         user = User.query.filter_by(email=email).first()
         if user:
@@ -57,7 +66,7 @@ def sign_up():
             flash('Password must be at least 7 characters.', category='error')
         else:
             new_user = User(email=email, first_name=first_name, last_name=last_name,password=generate_password_hash(
-                password1, method='sha256'))
+                password1, method='sha256'), pic=pic)
             db.session.add(new_user)
             db.session.commit()
 
