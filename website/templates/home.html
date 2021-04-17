@@ -1,5 +1,5 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
-%}
+{% extends "base.html" %} {% block title %}Home{% endblock %} 
+{% block content %}
 <div class="container">
     <div class="row">
       <div class="col-sm-7 col-md-7 col-lg-7">
@@ -19,16 +19,6 @@
               <div class="col-sm">
                 {{ user.profile_id }}
                 {% if user %} 
-                  <!-- Tried to split bio if too long 
-                  {#
-                    {{ bio_len = len(user.bio) }}
-                  {% user_bio = user.bio %}
-                  {% bio_beg = user_bio.slice(bio_len/2) %}
-                  {% bio_end = user_bio.slice(bio_len/2, bio_len) %} #}-->
-
-                  <!-- {{ bio_beg }} -->
-                  
-                  <!-- </br> -->
                 {{ user.bio }}
                 {% endif %}
               </div>
@@ -57,45 +47,21 @@
         </div>
       </div>
     </div>
-  <div class="container">
-    <table>
-    <tr>
-      <td>
-        <a href="posts.html#post1">
-         <img src="{{ url_for('static', filename='coding_notes.jpg') }}" class="grid_photo_3x3 center">
-        </a>
-      </td>
-      <td>
-        <a href="posts.html#post2">
-         <img src="{{ url_for('static', filename='coding_glasses.jpg') }}" class="grid_photo_3x3 center">
-        </a>
-      </td>
-      <td>
-        <a href="posts.html#post3">
-          <img src="{{ url_for('static', filename='coding_python1.jpg') }}" class="grid_photo_3x3 center">
-        </a>
-      </td>
+</div>
 
-    </tr>
-    </table>
-  </div>
-<!-- Original content
-  <h1 align="center">Notes</h1>
-<ul class="list-group list-group-flush" id="notes">
-  {% for note in user.notes %}
-  <li class="list-group-item">
-    {{ note.data }}
-    <button type="button" class="close" onClick="deleteNote({{ note.id }})">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </li>
-  {% endfor %}
-</ul>
-<form method="POST">
-  <textarea name="note" id="note" class="form-control"></textarea>
-  <br />
-  <div align="center">
-    <button type="submit" class="btn btn-primary">Add Note</button>
-  </div>
-</form> -->
+
+
+    <div class="container"> <!-- Container -->
+      <div class="row">
+        {% for indiv_blog in user.blogs %}
+        <div class="col-sm-4">
+          <a href={{'blogs#'+ indiv_blog.id|string}}>
+            <img src="{{ url_for('static', filename=indiv_blog.pic) }}" class="grid_photo_3x3 center">
+          </a>
+        </div>  <!-- Collumn End -->
+        {% endfor %}
+      </div>  <!-- Row End -->
+    </div> <!-- Container End -->
+    
+  
 {% endblock %}

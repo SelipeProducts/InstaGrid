@@ -1,10 +1,41 @@
 {% extends "base.html" %} {% block title %} Blogs {% endblock %} 
 {% block content %}
-  {{user}}
-  {{user.bloglist}}
-  {% for indiv_blog in user.bloglist %}
-    Title <br/>
-   {{indiv_blog.title}}
+    <div class="row">
+      <div class="col-sm">
+        <div align="center">
+          <h1> InstaGrid Blogs </h1>
+        </div>
+      </div>
+    </div>
+  {% for indiv_blog in user.blogs %}
+  {{indiv_blog.id}}
+    <div class="row">
+      <div class="col-sm">
+        <div align="center">
+          <img src="{{ url_for('static', filename=indiv_blog.pic) }}" class="grid_photo_posts center" id={{indiv_blog.id}}>
+          <div class="row post_padding"> <!-- inner row -->
+            <div class="col-sm">
+              <h5> 
+                {{ user.first_name 
+                + ' ' + 
+                user.last_name }} </h5>
+            </div>
+            <div class="col-sm">
+              {{ indiv_blog.title }}
+            </div>
+            <div class="col-sm">
+              {{ indiv_blog.date }}
+            </div>
+          <div> <!-- end of inner row -->
+          <div class="row"> <!-- inner row 2 -->
+            <div class="col-sm txt_align_left post_padding">
+              {{indiv_blog.content}}
+            </div>
+          </div> <!-- end of inner row 2 -->
+        </div>
+      </div>
+    </div>
+
   {% endfor %}
 
 
