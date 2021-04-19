@@ -1,0 +1,42 @@
+{% extends "base.html" %} {% block title %} Blogs {% endblock %} 
+{% block content %}
+
+<form method="POST" enctype = "multipart/form-data">
+  <h3 align="center">New Blog</h3>
+  <div class="form-group">
+    <label for="firstName">Title</label>
+    <input
+      type="text"
+      class="form-control"
+      id="title"
+      name="title"
+      placeholder="Enter your blog's title"
+    />
+  </div>
+  <div class="form-group">
+    <label for="content">Content</label>
+    <textarea 
+      class="form-control"
+      id="content" 
+      name="content" 
+      rows="4" 
+      cols="50"
+      placeholder="Enter your blog's content">
+    </textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="pic">Blog Pic</label>
+    <input 
+      type="file" 
+      class="form-control"
+      id="pic" 
+      name="pic"
+      placeholder="Local file location"
+    />
+  </div>
+  <br/>
+  <button type="submit" class="btn btn-primary"> Create Blog </button>
+</form>
+
+{% endblock %}

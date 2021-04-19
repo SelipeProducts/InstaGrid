@@ -3,6 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
 
+from datetime import datetime
+
 db = SQLAlchemy()
 DB_NAME = "database.db"
 
@@ -36,6 +38,18 @@ def create_app():
     @login_manager.user_loader
     def load_user(id):
         return User.query.get(int(id))
+    
+    
+    #Custom Filter for Jinja 
+    def strf_time(my_time):
+      # time_str = my_time.strftime('%B %d, %Y')
+      date_to_str = datetime
+      print(my_time)
+      print('Type:', type(my_time))
+      return my_time
+
+    app.jinja_env.filters['strftime'] = strf_time
+
 
     return app
 

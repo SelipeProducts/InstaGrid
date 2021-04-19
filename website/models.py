@@ -17,7 +17,7 @@ class User(db.Model, UserMixin):
     url = db.Column(db.String(150))
     pic = db.Column(db.String(150))
     notes = db.relationship('Note', backref='note_creater')
-    blogs = db.relationship('Blog', backref='blog_creater')
+    blogs = db.relationship('Blog', backref='blog_creator')
     
 class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)

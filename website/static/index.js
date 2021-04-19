@@ -6,3 +6,15 @@ function deleteNote(noteId) {
     window.location.href = "/";
   });
 }
+
+
+document.getElementById("create_blog").onclick = function () {
+        location.href = "/create";
+        alert();
+};
+
+
+function create_blog() {
+  location.href = "create";
+  alert();
+}

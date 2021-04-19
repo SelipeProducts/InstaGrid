@@ -2,13 +2,15 @@ from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import login_required, current_user
 from .models import Note, User, Blog
 
-from datetime import date, time, datetime
-
+from datetime import date
 from . import db
 import json
 
 import os
 from werkzeug.utils import secure_filename
+
+import jinja2
+
 
 views = Blueprint('views', __name__)
 
@@ -55,13 +57,10 @@ def profile():
     if f.filename != '':
       # f.save(f.filename)
       f.save(os.path.join('website/static', f.filename))
- 
+
     bio = request.form.get('bio')
     url = request.form.get('url')
     pic = f.filename
-
-    print("Pic Data:", pic)
-    print("Bio data", bio)
 
     if user:
       #if true if var exists
@@ -69,8 +68,9 @@ def profile():
         user.bio = bio
       if url !='':
         user.url = url
-      if pic !='' or pic is not None:
+      if pic:
         user.pic = pic
+
       db.session.commit()
       flash('Profile Successfully Updated!', category='success')
 
@@ -119,6 +119,47 @@ def blogs():
     db.session.add(blog3)
 
     db.session.commit()
+    
+    # env = jinja2.Environment()
+    # env.filters['strftime'] = strf_time
+
 
 
   return render_template('blogs.html', user=current_user)
+
+
+@views.route('/blogs/<indiv>')
+def blogs_indiv(indiv):
+  blog_indiv = Blog.query.filter_by(id=indiv).first()
+
+
+  #html give page blog specific info
+  return render_template('blogs_indiv.html', user=current_user,  blog = blog_indiv)
+
+
+@views.route('/create', methods=['GET', 'POST'])
+def create_blog():
+  user = current_user
+  if request.method == 'POST':
+    f = request.files['pic']
+    if f.filename != '':
+      f.save(os.path.join('website/static', f.filename))
+
+    title = request.form.get('title')
+    content = request.form.get('content')
+    pic = f.filename
+
+        #user = User.query.filter_by(email=email).first()
+    
+    if user:
+      new_blog = Blog(pic=pic, content=content, title=title, user_id=current_user.id)
+
+      db.session.add(new_blog)
+      db.session.commit()
+      flash('Blog Successfully Created!', category='success')
+
+
+    
+
+  
+  return render_template('create.html', user=current_user)

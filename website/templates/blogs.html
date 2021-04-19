@@ -1,5 +1,7 @@
-{% extends "base.html" %} {% block title %} Blogs {% endblock %} 
+{% extends "base.html" %} 
+{% block title %} Blogs {% endblock %} 
 {% block content %}
+  <div class="container">
     <div class="row">
       <div class="col-sm">
         <div align="center">
@@ -7,36 +9,67 @@
         </div>
       </div>
     </div>
-  {% for indiv_blog in user.blogs %}
-  {{indiv_blog.id}}
+
     <div class="row">
       <div class="col-sm">
-        <div align="center">
-          <img src="{{ url_for('static', filename=indiv_blog.pic) }}" class="grid_photo_posts center" id={{indiv_blog.id}}>
-          <div class="row post_padding"> <!-- inner row -->
-            <div class="col-sm">
-              <h5> 
-                {{ user.first_name 
-                + ' ' + 
-                user.last_name }} </h5>
-            </div>
-            <div class="col-sm">
-              {{ indiv_blog.title }}
-            </div>
-            <div class="col-sm">
-              {{ indiv_blog.date }}
-            </div>
-          <div> <!-- end of inner row -->
-          <div class="row"> <!-- inner row 2 -->
-            <div class="col-sm txt_align_left post_padding">
-              {{indiv_blog.content}}
-            </div>
-          </div> <!-- end of inner row 2 -->
+        <div align="right">
+          <a href="/create">
+          <button type="button" class="btn btn-primary"> New Blog </button>
+          </a>
         </div>
       </div>
     </div>
-
+  
+  </div>
+  {% if user.blogs %}
+  {% for indiv_blog in user.blogs %}
+    <a href="blogs/{{indiv_blog.id}}"  style="color:#000000; text-decoration:none" >
+      <h3> Blog #{{indiv_blog.id}} </h3>
+      <div class="row">
+        <div class="col-sm">
+          <div align="center">
+            <img src="{{ url_for('static', filename=indiv_blog.pic) }}" class="grid_photo_posts center" id={{indiv_blog.id}}>
+            <div class="row post_padding"> <!-- inner row -->
+              <div class="col-sm">
+                <h5> 
+                  {{ user.first_name 
+                  + ' ' + 
+                  user.last_name }} </h5>
+              </div>
+              <div class="col-sm">
+                {{ indiv_blog.title }}
+              </div>
+              <div class="col-sm">
+                <!-- Macro for time ///not working bc of code in init -->
+                {{indiv_blog.post_date | strftime }}
+                {% macro strf_time(my_time) %}
+                  {{indiv_blog.post_date | strftime }}
+                {% endmacro %}
+            
+              </div>
+            <div> <!-- end of inner row -->
+            <div class="row"> <!-- inner row 2 -->
+              <div class="col-sm txt_align_left post_padding">
+                {{indiv_blog.content}}
+              </div>
+            </div> <!-- end of inner row 2 -->
+          </div>
+        </div>
+      </div>
+    </a>
   {% endfor %}
+  {% endif %}
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div align="right">
+          <a href="/create">
+            <button type="button" class="btn btn-primary"> New Blog </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 {% endblock %}
